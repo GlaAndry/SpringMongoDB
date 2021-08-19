@@ -47,22 +47,33 @@ public class EsempioSpring2Application {
                     LocalDateTime.now()
 			);
 
-            //Query personalizzate
-            Query query = new Query();
-            query.addCriteria(Criteria.where("email").is(email));
-            List<Student> students = mongoTemplate.find(query, Student.class);
+            //usingMongoTemplateMethod(studentRepository, mongoTemplate, email, student);
 
-            //query di inserimento ed eliminazione dal db
-            //direttamente fornite da mongo.
-            if(students.isEmpty()){
-                //se non ci sono duplicati aggiungiamo
-                studentRepository.insert(student);
-            } else {
+            studentRepository.findStudentByEmail(email).ifPresentOrElse(s -> {
+                //lo studente esiste
                 System.out.println("Ci sono diverse email uguali:" + email);
-            }
-
+            }, () -> {
+                //altrimenti viene aggiunto
+                studentRepository.insert(student);
+            });
         };
 
 
+    }
+
+    private void usingMongoTemplateMethod(StudentRepository studentRepository, MongoTemplate mongoTemplate, String email, Student student) {
+        //Query personalizzate
+        Query query = new Query();
+        query.addCriteria(Criteria.where("email").is(email));
+        List<Student> students = mongoTemplate.find(query, Student.class);
+
+        //query di inserimento ed eliminazione dal db
+        //direttamente fornite da mongo.
+        if(students.isEmpty()){
+            //se non ci sono duplicati aggiungiamo
+            studentRepository.insert(student);
+        } else {
+            System.out.println("Ci sono diverse email uguali:" + email);
+        }
     }
 }

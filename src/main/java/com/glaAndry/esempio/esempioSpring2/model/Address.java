@@ -1,4 +1,4 @@
-package com.glaAndry.esempio.esempioSpring2.entity;
+package com.glaAndry.esempio.esempioSpring2.model;
 
 import lombok.Data;
 

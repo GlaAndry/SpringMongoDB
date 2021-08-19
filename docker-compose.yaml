@@ -29,7 +29,7 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=tribes
     ports:
-      - '8081:8081'
+      - '8081:8081' ##Porta Host: Porta Container
     volumes:
       - ./data:/data/db
 

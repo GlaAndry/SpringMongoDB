@@ -1,18 +1,18 @@
-package com.glaAndry.esempio.esempioSpring2.entity;
+package com.glaAndry.esempio.esempioSpring2.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data //getter and setter automatici tramite lombok
 @Document //identifica la classe come collezione all'interno di MongoDB
-public class Student {
+public class Student implements Serializable {
 
     @Id
     private String Id;

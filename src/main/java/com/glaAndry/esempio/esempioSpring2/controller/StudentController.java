@@ -1,6 +1,6 @@
 package com.glaAndry.esempio.esempioSpring2.controller;
 
-import com.glaAndry.esempio.esempioSpring2.entity.Student;
+import com.glaAndry.esempio.esempioSpring2.model.Student;
 import com.glaAndry.esempio.esempioSpring2.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,8 @@
 package com.glaAndry.esempio.esempioSpring2;
 
-import com.glaAndry.esempio.esempioSpring2.entity.Address;
-import com.glaAndry.esempio.esempioSpring2.entity.Gender;
-import com.glaAndry.esempio.esempioSpring2.entity.Student;
+import com.glaAndry.esempio.esempioSpring2.model.Address;
+import com.glaAndry.esempio.esempioSpring2.model.Gender;
+import com.glaAndry.esempio.esempioSpring2.model.Student;
 import com.glaAndry.esempio.esempioSpring2.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +23,7 @@ public class EsempioSpring2Application {
         SpringApplication.run(EsempioSpring2Application.class, args);
     }
 
+    /*
     @Bean
     CommandLineRunner runner(StudentRepository studentRepository, MongoTemplate mongoTemplate) {
 
@@ -58,8 +59,10 @@ public class EsempioSpring2Application {
             });
         };
 
+        }
+     */
 
-    }
+
 
     private void usingMongoTemplateMethod(StudentRepository studentRepository, MongoTemplate mongoTemplate, String email, Student student) {
         //Query personalizzate

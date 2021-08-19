@@ -1,6 +1,6 @@
 package com.glaAndry.esempio.esempioSpring2.service;
 
-import com.glaAndry.esempio.esempioSpring2.entity.Student;
+import com.glaAndry.esempio.esempioSpring2.model.Student;
 import com.glaAndry.esempio.esempioSpring2.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

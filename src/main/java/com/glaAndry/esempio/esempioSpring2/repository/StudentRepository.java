@@ -1,8 +1,7 @@
 package com.glaAndry.esempio.esempioSpring2.repository;
 
-import com.glaAndry.esempio.esempioSpring2.entity.Student;
+import com.glaAndry.esempio.esempioSpring2.model.Student;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 import java.util.Optional;
 

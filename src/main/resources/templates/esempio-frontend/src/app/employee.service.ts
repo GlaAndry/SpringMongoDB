@@ -12,14 +12,14 @@ import { environment } from 'src/environments/environment';
 export class EmployeeService {
 
     private apiServerUrl = environment.apiBaseUrl; //preso da env
-    //${this.apiServerUrl} non prende il valore???
+    //${this.apiServerUrl} non prende il valore??? --> serve `` non '' o ""
 
 
     constructor(private http: HttpClient) {}
 
 
     public getEmployees(): Observable<Employee[]> {
-        return this.http.get<Employee[]>('http://localhost:8080/api/v1/employee/findAll')
+        return this.http.get<Employee[]>(`${this.apiServerUrl}/api/v1/employee/findAll`)
     }
 
     public addEmployee(employee: Employee): Observable<Employee> {

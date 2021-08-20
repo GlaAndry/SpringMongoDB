@@ -15,17 +15,23 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public Employee findEmployeeByID(long id){
+    public Employee findEmployeeByID(String id){
         return employeeRepository.findEmployeeById(id)
                 .orElseThrow(() ->
                         new UserNotFoundException("User Not Found By ID:" + id));
     }
 
-    public Employee addOrUpdateEmployee(Employee employee){
-        return employeeRepository.save(employee);
+    public Employee findEmployeeByName(String name){
+        return employeeRepository.findEmployeeByName(name)
+                .orElseThrow(() ->
+                        new UserNotFoundException("User Not Found By Name:" + name));
     }
 
-    public void deleteEmployee(long id){
+    public Employee addOrUpdateEmployee(Employee employee){
+        return employeeRepository.insert(employee);
+    }
+
+    public void deleteEmployee(String id){
         employeeRepository.deleteEmployeeById(id);
     }
 

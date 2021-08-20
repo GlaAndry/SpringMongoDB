@@ -12,7 +12,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, String> {
     Optional<Employee> findById(String s);
     Optional<Employee> findEmployeeByName(String s);
     void deleteEmployeeByName(String s);
-    void deleteEmployeeById(long id);
-
-    Optional<Employee> findEmployeeById(long id);
+    void deleteEmployeeById(String id);
+    Optional<Employee> findEmployeeById(String id);
 }

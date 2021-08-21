@@ -40,15 +40,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee){
-//        Update update = new Update();
-//        Query query = new Query().addCriteria(Criteria.where("_id").is(employee.getId()));
-//        update.set("name", employee.getName());
-//        update.set("email", employee.getEmail());
-//        update.set("phone", employee.getPhone());
-//        update.set("code", employee.getCode());
-//        mongoTemplate.update(Employee.class).matching(query).apply(update);
         return employeeRepository.save(employee);
-        //return employee;
     }
 
     public void deleteEmployee(String id){

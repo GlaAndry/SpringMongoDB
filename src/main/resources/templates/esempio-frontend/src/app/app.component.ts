@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     //dei campi di interesse all'interno della form.
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
-        console.log(response);
+        //console.log(response);
         this.getEmployess(); //ricarico gli impiegati
         //clear form
         addForm.reset();
@@ -61,31 +61,60 @@ export class AppComponent implements OnInit {
 
   //funzione che si occupa dell'eliminazione di un 
   //impiegato dal sistema
-  public onDeleteEmployee(id: string): void {
+  public onDeleteEmployee(id: string | undefined): void {
 
-    // this.employeeService.deleteEmployeeById(employee.id).subscribe(
-    //   (response: string) => {
-
-    //   }
-    // )
-
-
+    if(id != null){
+      this.employeeService.deleteEmployeeById(id).subscribe(
+        (response: void) => {
+          //console.log(id);
+          this.getEmployess();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        } 
+      );
+    }
   }
 
+  //Funzione di update per i documenti all'interno
+  //del database.
   public onUpdateEmployee(employee: Employee): void {
 
     //Il valore di employee è preso tramite la ngForm dall'Html
-    employee.Id = '611f5b0c41c78c587fe0d302';
     this.employeeService.updateEmployee(employee).subscribe(
       (response: Employee) => {
-        console.log(response);
-        console.log(employee.Id);
+        //console.log(response);
         this.getEmployess(); //ricarico gli impiegati
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       } 
     );
+  }
+
+  //definisce la ricerca di un impiegato per nome
+  //all'interno della pagina web
+  public searchEmployees(employeeName: string): void {
+
+    const res: Employee[] = []; //inizialmente vuoto.
+    if(this.employees != null){
+      for(const employee of this.employees){
+        if(employee.name.toLowerCase().indexOf(employeeName.toLowerCase()) !== -1){ 
+          //se abbiamo una corrispondenza allora inseriamo nella lista
+          res.push(employee);
+        }
+      }
+    }
+
+    this.employees = res;
+
+    if(!employeeName){
+      //reset del valore della lista per il 
+      //display di tutti gli impiegati se 
+      //non abbiamo scritto nulla nella barra
+      //di ricerca.
+      this.getEmployess();
+    }
   }
 
   //Funzione per l'apertura dei diversi Modal.

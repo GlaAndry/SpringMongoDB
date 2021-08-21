@@ -32,6 +32,6 @@ export class EmployeeService {
 
     //Variabile: Tipo ----- Observable(ritorno) --> void per delete
     public deleteEmployeeById(employeeId: string): Observable<void> {
-        return this.http.delete<void>('http://localhost:8080/api/v1/employee/deleteEmployee/${employeeId}')
+        return this.http.delete<void>(`http://localhost:8080/api/v1/employee/deleteEmployee/${employeeId}`)
     }
 }

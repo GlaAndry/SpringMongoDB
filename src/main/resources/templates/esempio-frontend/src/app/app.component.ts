@@ -9,16 +9,16 @@ import { EmployeeService } from './employee.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  public employees?: Employee[];  
+  public employees?: Employee[];
   public editEmployee?: Employee;
   public deleteEmployee?: Employee;
 
   constructor(private employeeService: EmployeeService) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     //funzione richiamata ogni volta che il componente viene
     //inizializzato in quanto stiamo implementando OnInit
     this.getEmployess();
@@ -41,9 +41,51 @@ export class AppComponent implements OnInit{
 
     //value è individuato da una rappresentazione JSON 
     //dei campi di interesse all'interno della form.
-    this.employeeService.addEmployee(addForm.value);
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployess(); //ricarico gli impiegati
+        //clear form
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
+      }
+    );
+    //chiudo il modal premendo il bottone cancel da codice
+    document.getElementById('add-employee-form')?.click();
+
+  }
 
 
+  //funzione che si occupa dell'eliminazione di un 
+  //impiegato dal sistema
+  public onDeleteEmployee(id: string): void {
+
+    // this.employeeService.deleteEmployeeById(employee.id).subscribe(
+    //   (response: string) => {
+
+    //   }
+    // )
+
+
+  }
+
+  public onUpdateEmployee(employee: Employee): void {
+
+    //Il valore di employee è preso tramite la ngForm dall'Html
+    employee.Id = '611f5b0c41c78c587fe0d302';
+    this.employeeService.updateEmployee(employee).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        console.log(employee.Id);
+        this.getEmployess(); //ricarico gli impiegati
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      } 
+    );
   }
 
   //Funzione per l'apertura dei diversi Modal.
@@ -61,14 +103,18 @@ export class AppComponent implements OnInit{
 
     //ricavo il container definito nell'HTML tramite ID
     const container = document.getElementById('main-container');
-    
 
-    if(mode === 'add'){ //addModal
+
+    if (mode === 'add') { //addModal
       btn.setAttribute('data-target', '#addEmployeeModal'); //id del modal nell'HTML
-    } else if (mode === 'edit'){
+    } else if (mode === 'edit') {
+      //set dell'employee che è stato scelto dall'utente
+      if(employee != null){
+        this.editEmployee = employee;
+      }
       btn.setAttribute('data-target', '#updateEmployeeModal');
     } else if (mode === 'delete') {
-      if(employee != null){ //verifico che employee sia != da null
+      if (employee != null) { //verifico che employee sia != da null
         this.deleteEmployee = employee;
       }
       btn.setAttribute('data-target', '#deleteEmployeeModal');
@@ -82,5 +128,5 @@ export class AppComponent implements OnInit{
 
   }
 
-  
+
 }

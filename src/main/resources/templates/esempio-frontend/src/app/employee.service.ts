@@ -26,6 +26,10 @@ export class EmployeeService {
         return this.http.post<Employee>('http://localhost:8080/api/v1/employee/addEmployee', employee)
     }
 
+    public updateEmployee(employee: Employee): Observable<Employee> {
+        return this.http.put<Employee>('http://localhost:8080/api/v1/employee/updateEmployee', employee)
+    }
+
     //Variabile: Tipo ----- Observable(ritorno) --> void per delete
     public deleteEmployeeById(employeeId: string): Observable<void> {
         return this.http.delete<void>('http://localhost:8080/api/v1/employee/deleteEmployee/${employeeId}')
